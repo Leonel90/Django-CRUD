@@ -27,7 +27,10 @@
     <div>
         <h4>{{task.title}}</h4>
         <p>{{task.description}}</p>
-        <button>Eliminar</button>
+        <form action="{% url 'delete_task' task.id %}" method="POST">
+            {% csrf_token %}
+            <button>Eliminar</button>
+        </form>
     </div>
     {% empty %}
     <h1>No hay registros</h1>
