@@ -14,27 +14,37 @@
 </head>
 
 <body>
-    <h1>hola Django</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <h1 class="display-6 fw-bold">hola Django</h1>
 
-    <form action="{% url 'create_task' %}" method="POST">
-        {% csrf_token %}
-        <input type="text" name="title" placeholder="Escriba el titulo">
-        <textarea name="description" rows="3" placeholder="Escriba la descripción"></textarea>
-        <button>Guardar</button>
-    </form>
+                <form action="{% url 'create_task' %}" method="POST" class="card card-body bg-secondary">
+                    {% csrf_token %}
+                    <label for="title">Titulo</label>
+                    <input type="text" name="title" placeholder="Escriba el titulo" class="form-control mb-2">
+                    <label for="description">Descripción</label>
+                    <textarea name="description" rows="3" placeholder="Escriba la descripción" class="form-control mb-2"></textarea>
+                    <button class="btn btn-success">Guardar</button>
+                </form>
 
-    {% for task in tasks %}
-    <div>
-        <h4>{{task.title}}</h4>
-        <p>{{task.description}}</p>
-        <form action="{% url 'delete_task' task.id %}" method="POST">
-            {% csrf_token %}
-            <button>Eliminar</button>
-        </form>
+                {% for task in tasks %}
+                <div class="card card-body text-black mt-2 d-flex flex-row justify-content-between">
+                    <div>
+                        <h4>{{task.title}}</h4>
+                        <p>{{task.description}}</p>
+                    </div>
+                    <form action="{% url 'delete_task' task.id %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-danger">Eliminar</button>
+                    </form>
+                </div>
+                {% empty %}
+                <h1 class="display-4 text-center">No hay registros</h1>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-    {% empty %}
-    <h1>No hay registros</h1>
-    {% endfor %}
 </body>
 
 </html>
