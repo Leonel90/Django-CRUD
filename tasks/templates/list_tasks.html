@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="{% static 'main.css' %}">
 
 </head>
+
 <body>
     <h1>hola Django</h1>
 
@@ -20,5 +22,16 @@
         <textarea name="description" rows="3" placeholder="Escriba la descripción"></textarea>
         <button>Guardar</button>
     </form>
+
+    {% for task in tasks %}
+    <div>
+        <h4>{{task.title}}</h4>
+        <p>{{task.description}}</p>
+        <button>Eliminar</button>
+    </div>
+    {% empty %}
+    <h1>No hay registros</h1>
+    {% endfor %}
 </body>
+
 </html>
